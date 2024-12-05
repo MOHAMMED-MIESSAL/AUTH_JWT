@@ -1,4 +1,4 @@
-package com.briefs.hunters_league.converter;
+package com.briefs.hunters_league.utils.converter;
 
 import com.briefs.hunters_league.domain.enums.Role;
 import jakarta.persistence.AttributeConverter;

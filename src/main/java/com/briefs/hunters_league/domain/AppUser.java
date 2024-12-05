@@ -1,6 +1,6 @@
 package com.briefs.hunters_league.domain;
 
-import com.briefs.hunters_league.converter.RoleConverter;
+import com.briefs.hunters_league.utils.converter.RoleConverter;
 import com.briefs.hunters_league.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.briefs.hunters_league.service;
+package com.briefs.hunters_league.service.auth;
 
 import com.briefs.hunters_league.domain.AppUser;
 import com.briefs.hunters_league.repository.AppUserRepository;

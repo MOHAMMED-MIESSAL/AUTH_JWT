@@ -1,5 +1,4 @@
 spring:
-
   docker:
     compose:
       file: src/main/docker/compose.yaml
@@ -12,3 +11,7 @@ spring:
 
 server:
   port: 8081
+
+jwt:
+  secret:
+    key: k3qPf+6b3vQZ7uQ9Tg9z9LzQ7cBx7v5t3b1T9H7uJ3A=
