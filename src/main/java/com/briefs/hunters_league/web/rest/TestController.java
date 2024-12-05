@@ -14,12 +14,5 @@ public class TestController {
         return "Hello World! This is a Welcome message from the Hunters League API";
     }
 
-    @GetMapping("/home")
-    public String home() {
-        return "Welcome to the Hunters League API";
-    }
-
-
-
 
 }

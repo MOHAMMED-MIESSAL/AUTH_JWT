@@ -1,15 +1,18 @@
 package com.briefs.hunters_league.web.rest.auth;
 
+import com.briefs.hunters_league.domain.AppUser;
+import com.briefs.hunters_league.mapper.AppUserMapper;
+import com.briefs.hunters_league.service.AppUserService;
 import com.briefs.hunters_league.utils.request.LoginRequest;
 import com.briefs.hunters_league.service.auth.JwtBlacklistService;
 import com.briefs.hunters_league.service.auth.JwtService;
 import com.briefs.hunters_league.service.auth.MyDatabaseUserDetailsService;
+import com.briefs.hunters_league.vm.AppUserVM;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,10 +21,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
+    private final AppUserService appUserService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final MyDatabaseUserDetailsService userDetailsService;
     private final JwtBlacklistService jwtBlacklistService;
+    private final AppUserMapper appUserMapper;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
@@ -35,6 +40,13 @@ public class AuthController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AppUserVM> createUser(@RequestBody AppUser appUser) {
+        AppUser createdUser = appUserService.save(appUser);
+        AppUserVM appUserVM = appUserMapper.toAppUserVM(createdUser);
+        return ResponseEntity.ok(appUserVM);
     }
 
     @PostMapping("/logout")
@@ -51,4 +63,5 @@ public class AuthController {
 
         return ResponseEntity.badRequest().body("Authorization header is missing or invalid");
     }
+
 }
